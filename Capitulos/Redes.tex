@@ -1,0 +1,103 @@
+\chapter{Redes}
+Las redes, también llamadas grafos, son la representación matemática de un sistema complejo que involucra elementos comunicados entre si. Un grafo esta compuesto por un conjunto de nodos y un conjunto de aristas entre nodos. Los nodos representan los elementos fundamentales del sistema y las aristas representan las conexiones entre estos elementos. En el caso de una red basada en un conectoma estructural, los nodos representan las regiones de interés definidas y las aristas las conexiones de tractos axonales obtenidas mediante una tractografía.
+
+En este capítulo se dará una introducción a teoría de grafos, primero viendo la clasificación y su representación mediante la matriz de adyacencia. Luego se explicarán el concepto de comunicación en redes, mostrando los dos modelos predominantes en el análisis de redes cerebrales y por último se introducirán las medidas utilizadas en este proyecto para caracterizar la comunicación en estas redes.
+
+\section{Clasificación de grafos y matriz de adyacencia.}
+
+Los grafos se clasifican de acuerdo al tipo de conexiones tengan. Las conexiones pueden ser binarias, es decir que existe o no existe conexión, o pueden tener un peso asociado, en este caso, si la conexión existe, el peso puede significar la fuerza o importancia de la conexión. También pueden diferenciarse las conexiones en caso de que sean no dirigidas, es decir que la conexión que hay entre dos nodos es simétrica, o dirigidas, en este caso las conexiones son asimétricas. En la figura \ref{fig:tipos_grafos} se muestran representaciones gráficas de los diferentes tipos de grafos de acuerdo a sus conexiones.
+
+Una de las formas mas simples y útiles de representar un grafo es la matriz de adyacencia. La matriz de adyacencia $A$ define la topología de un grafo representando a los nodos como  filas y columnas y a las aristas como los valores presentes en la matriz. Es decir, el valor $a_{ij}$ (fila i y columna j de la matriz) representa la conexión desde el nodo $i$ hacia el nodo $j$ del grafo, si $a_{ij}=1$ quiere decir que existe una arista que une al nodo $i$ con el $j$, si $a_{ij}=0$ no hay arista desde el nodo $i$ hasta al nodo j. A dos nodos que estén conectados directamente (que exista una arista entre ellos) se los conoce como nodos vecinos. Es normal hacer una diferencia entre la matriz de adyacencia $A$ y la matriz de pesos $W$, mientras que la matriz de adyacencia representa la existencia o no de aristas, el elemento $w_{ij}$ de la matriz de pesos representa las aristas con sus pesos. En el caso de un grafo binario $w_{ij}=a_{ij}$ ya que el peso de una arista siempre es 1, mientras que en un grafo pesado no necesariamente se cumple esta igualdad. En el caso de un grafo no dirigido $a_{ij}=a_{ji}$ y $w_{ij}=w_{ji}$, por la simetría de la conexión, mientras que en un grafo dirigido esta igualdad no necesariamente se cumple. En la figura \ref{fig:tipos_grafos} se muestran los diferentes tipos de grafos con su representación gráfica y su matriz de pesos al lado.
+
+Definidas las matrices de adyacencia y pesos, se puede definir el grado y el grado pesado de un nodo:
+
+\begin{multicols}{2}
+    \begin{equation}
+        k_{i} = \sum_{j \in N} a_{ij}
+    \end{equation}\break
+    \begin{equation}
+        k_{w_i} = \sum_{j\in N} w_{ij}
+    \end{equation}
+\end{multicols}
+
+donde $N$ es el conjunto de todos los nodos del grafo, $k_{i}$ es el grado del nodo $i$ y $k_{w_i}$ es el grado pesado del nodo $i$.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.9\linewidth]{tipos_grafo_2.pdf}
+    \caption{Representación gráfica de diferentes tipos de grafos. \textbf{(A)} Un grafo dirigido y pesado (izquierda), las flechas representan la direccionalidad de las conexiones y el color de las aristas representando el peso. En la matriz de pesos (derecha) se muestran los pesos de las conexiones con número y color. \textbf{(B)} El mismo grafo que en \textbf{(A)} pero binario (izquierda), las flechas siguen representando la direccionalidad y ahora el color es el mismo para todas las aristas. En la matriz de conectividad (derecha) las conexiones tienen valor 0 o 1. \textbf{(C)} Mismo grafo que en \textbf{(A)} pero no dirigido (izquierda), las conexiones ya no tienen direccionalidad, por eso no hay flechas. La matriz de pesos (derecha) es simétrica. \textbf{(D)} Versión binaria y no dirigida del grafo en \textbf{C} (izquierda), mismo color para todas las conexiones y ausencia de flechas. La matriz de pesos (derecha) es simétrica y con valores 0 o 1. }
+    \label{fig:tipos_grafos}
+\end{figure}
+
+
+\section{Comunicación en redes}
+Como se dijo en el Capítulo \ref{cap:Introduccion}, lo que hace posible que el cerebro pueda cumplir todas sus complejas funciones es la comunicación y organización que surge entre las neuronas que lo componen. Es por esto que es importante entender que información se puede obtener de un grafo sobre la comunicación del sistema que representa, en este caso la red cerebral. La forma de medir comunicación en redes es a través de los caminos, un camino es una secuencia de aristas y nodos que une a dos nodos de una red. La distancia de un camino es la suma de las distancias de las aristas que lo componen. En un grafo binario, la distancia asociada a una arista es 1 y la distancia de un camino es el número de aristas atravesadas. En un grafo pesado, la distancia asociada a una arista es alguna función del peso de la misma, la forma de elegir esta función depende de la situación y no es trivial. En redes cerebrales estructurales, donde el peso de las conexiones representa el número de tractos axonales que unen a dos regiones, es razonable elegir una métrica decreciente con el peso de la conexión, es decir, que mientras mas grande sea el peso, menor sea la distancia asociada a esa arista. De esta forma, si dos regiones están unidas por una gran cantidad de tractos de materia blanca (un peso alto) la distancia entre esas regiones es baja (la función evaluada en ese peso es chica). Para medir la forma en que dos nodos de una red se comunican existen dos modelos diferentes: ruteo y difusión.
+
+\subsection{Ruteo}
+El modelo de ruteo supone que la propagación de una señal de entre dos nodos ocurre a través del camino mas corto que los une. El camino más corto entre las regiones $i$ y $j$ de la red se denota como $\rho_{ij}$ y $l_{ij}$ la distancia de este camino. De esta forma:
+\begin{equation}
+    l_{ij} = \sum_{w_{nm}\in \rho_{ij}}f\left( w_{nm} \right),
+\end{equation}
+donde $w_{nm}$ es el peso de la arista que une al nodo n con el nodo m. En el caso de una red binaria, $f$ es la identidad y $l_{ij}$ es el numero de aristas que componen al camino. La distancia entre dos nodos de la red se define como la distancia del camino mas corto que los une, de esta forma $l_{ij}$ es la distancia entre el nodo $i$ y el nodo $j$ de la red. En la sección \ref{ssec:algoritmos} se introduce el algoritmo de Dijkstra, usado para calcular el camino mas corto entre dos nodos de una red.
+
+El uso de caminos mas cortos para propagar señales es claramente mas eficiente, al usar caminos cortos, la señal llega mas rápido y es menos probable que se pierda o que se llene de ruido. Sin embargo, esta suposición implica que cada elemento de la red, o neurona, tiene conocimiento sobre la topología global de la misma. ¿Cómo puede saber una neurona cual es la ruta mas corta para enviar una señal a otra neurona? Es improbable que lo sepa y es por esto que surge otro modelo sobre transmisión de señales cerebrales, el modelo de difusión.
+
+\subsection{Difusión}
+En contraste con el modelo de ruteo, el modelo de difusión supone que las señales cerebrales se transmiten mediante un proceso de difusión. En un proceso de difusión las señales no viajan a través de los caminos mas cortos o a través de un camino en particular, si no que se propagan de forma dispersiva, a través de múltiples frentes, usando varios caminos diferentes a la vez y sin un destino único. En un modelo de difusión, la información enviada desde un nodo puede llegar a varios destinos a través de varios caminos diferentes, la difusión puede ser pensada como un proceso de \textit{broadcasting}.
+
+En un contexto de propagación de señales por difusión, los caminos mas cortos no son los únicos relevantes para caracterizar que tan comunicados están dos nodos de la red. Todos los caminos que existan son sirven caracterizar la comunicación entre ellos. Sin embargo, la cantidad de caminos que existen entre dos nodos nodos aumenta de forma factorial con el tamaño del grafo, por esto se suele usar el conjunto de los $K$ caminos mas cortos. En la sección \ref{ssec:algoritmos} se introducirá el algoritmo de Yen que sirve para obtener los $K$ caminos mas cortos entre un nodo fuente y un nodo objetivo.
+
+\subsection{Cálculo de caminos mas cortos}\label{ssec:algoritmos}
+
+\subsubsection{Algoritmo de Dijkstra}
+El algoritmo de Dijkstra es el algoritmo para calcular caminos mas cortos en grafos más usado. Fue concebido por el científico de la computación Edsger Dijkstra en 1956. El algoritmo es iterativo, en cada iteración se actualizan las distancias entre un nodo inicial (definido por el usuario) y cada uno de los nodos restantes del grafo. En principio a cada nodo se le asigna un valor que representa la distancia al \textbf{nodo inicial} y el algoritmo busca disminuir este valor. Los pasos del algoritmo son:
+\begin{enumerate}[label=\textbf{\arabic*}]
+    \item Marcar a todos los nodos como \textbf{no visitados}, crear un conjunto de nodos no visitados llamado el \textbf{conjunto no visitado}
+    \item Crear una tabla de nodos predecesores llamado el \textbf{tabla de predecesores} que contenga a los predecesores de cada nodo. El predecesor de un nodo es el nodo previo en un camino dado.
+    \item Asignarle al nodo inicial una distancia de 0 (la distancia entre un nodo y si mismo es cero) y al resto de los nodos una distancia de infinito.
+    \item \label{en:dijkstra_1}Para el nodo actual (en la primera iteración es el \textbf{nodo inicial}) calcular las distancias tentativas a cada uno de sus vecinos (nodos directamente conectados) que estén marcados como \textbf{no visitados}. Las distancias tentativas se calculan sumando la distancia del nodo actual (en el caso del nodo inicial seria una distancia de cero) y la distancia asociada a la arista que lo une con el nodo vecino.
+    \item Para cada vecino no visitado comparar su distancia tentativa con su distancia asignada, si la distancia tentativa es menor, reemplazar la distancia asignada por la distancia tentativa y marcar en la \textbf{tabla de predecesores} al nodo actual como el nodo predecesor de este vecino no visitado.
+    \item Sacar al nodo actual del \textbf{conjunto no visitado} (nunca se lo volverá a visitar).
+    \item \label{en:dijkstra_2}Elegir de entre los nodos \textbf{no visitados} al que tenga la menor distancia asignada como el nuevo nodo actual.
+    \item Repetir los pasos \ref{en:dijkstra_1}-\ref{en:dijkstra_2} hasta que el \textbf{conjunto no visitado} quede vacío.
+\end{enumerate}
+
+Al finalizar el algoritmo, cada nodo tiene asignada la distancia hacia el \textbf{nodo inicial} y se puede reconstruir el camino mas corto con la \textbf{tabla de predecesores}. En el caso de que la distancia asignada a un nodo sea infinito, quiere decir que ese nodo no puede ser accedido desde el \textbf{nodo inicial}, es decir, no existe ningún camino que los una. En la figura \ref{fig:dijkstra_graph} se muestra una representación grafica del algoritmo en un grafo pesado no dirigido.
+
+\subsubsection{Algoritmo de Yen}
+El algoritmo de Yen es un algoritmo utilizado para obtener los $K$ caminos mas cortos sin bucles que existen entre un \textbf{nodo fuente} y un \textbf{nodo objetivo}. Fue publicado por Jin Y. Yen en 1971. Utiliza algún algoritmo para obtener el camino mas corto a partir del cual busca las $K-1$ desviaciones mas cortas. Para explicar como funciona el algoritmo, primero es necesario establecer algunas definiciones:
+
+\begin{description}[font=\sffamily\bfseries, itemindent=0.125cm]
+    \item[$\mathbf{N}$:] Número de nodos que contiene el grafo.
+    \item[$\mathbf{(i)}$:] Nodo $i$-ésimo del grafo. El nodo fuente es ($\mathbf{1}$) y el nodo objetivo es ($\mathbf{N}$).
+    \item[$\mathbf{d_{ij}}$:] La distancia asociada a la arista $a_{ij}$, es decir $\mathbf{d_{ij}}=f\left( w_{ij} \right)$.
+    \item[$\mathbf{A^k}$:] $\mathbf{A^k=(1)-(2^k)-(3^k)-\cdots-(Q^{k}_k)-(N)}$ es el $k$-ésimo camino mas corto entre ($1$) y ($N$), con $k$ entre $1$ y $K$. ($\mathbf{2^k}$) es el segundo nodo de $\mathbf{A^k}$, ($\mathbf{3^k}$) el tercero y así con el resto de los nodos, siendo ($\mathbf{Q^{k}_k}$) el nodo anterior a ($\mathbf{N}$).
+    \item[$\mathbf{A^{k}_i}$:] Desviación del camino $\mathbf{A^{k-1}}$ en el nodo $\mathbf{i^k})$, con $i$ entre $1$ y $Q_k$. No puede haber una desviación en el nodo $\mathbf{(N)}$ Los caminos $\mathbf{A^{k}_i}$ y $\mathbf{A^{k-1}}$ son iguales hasta el nodo $i$-ésimo.
+    \item[$\mathbf{R^{k}_i}$:] Camino raíz de $\mathbf{A^{k}_i}$ que es igual a $\mathbf{A^{k-1}}$ hasta el nodo $i$-ésimo.
+    \item[$\mathbf{S^{k}_i}$:] Camino espurio de $\mathbf{A^{k}_i}$ que empieza en el nodo $i$-ésimo y termina en el nodo objetivo $(\mathbf{N})$
+\end{description}
+
+Los pasos del algoritmo son:
+
+\begin{enumerate}[label=\textbf{\arabic*}]
+    \item Crear el contenedor $\mathbf{A}$ que guardará a los $k$ caminos mas cortos  y el contenedor $\mathbf{B}$ que contendrá a los potenciales k-caminos mas cortos.
+    \item Determinar el camino mas corto $\mathbf{A^1}$ entre el \textbf{nodo fuente} y el \textbf{nodo objetivo} usando algún algoritmo de camino mas cortos, por ejemplo, el algoritmo de Dijkstra.
+    \item \label{en:borra_aristas} Elegir el nodo espurio $(\mathbf{i^{k-1}})$ y el camino raíz $\mathbf{R^{k}_i}$. Si $\mathbf{R^{k}_i}$ es igual a $\mathbf{R^{j}_i}$, eliminar la arista $\mathbf{(i^{j-1})-((i+1)^{j-1})}$ con $j\in[2,k]$. Es decir, si el camino raíz $\mathbf{R^{k}_i}$ esta incluido en alguno de los caminos mas cortos ya calculados, se borran las aristas que continuaban en esos caminos y se asegura que el camino espurio $\mathbf{S^{k}_i}$ no finalice igual que estos. Así, $\mathbf{A^{k}_i}$ no estará ya entre los caminos mas cortos anteriormente obtenidos.
+    \item \label{en:borra_nodos} Eliminar todos los nodos presentes en $\mathbf{R^{k}_i}$ para evitar atravesarlos nuevamente.
+    \item Calcular $\mathbf{S^{k}_i}$ como el camino mas corto entre $(\mathbf{i^{k-1}})$ y $\mathbf{(N)}$. Luego obtener $\mathbf{A^{k}_i}$ uniendo $\mathbf{R^{k}_i}$ y $\mathbf{S^{k}_i}$ y agregarlo al contenedor $\mathbf{B}$.
+    \item \label{en:yen_fin}Restaurar aristas y nodos borrados en \ref{en:borra_aristas} y \ref{en:borra_nodos}.
+    \item Repetir \ref{en:borra_aristas}-\ref{en:yen_fin} para $i\in [1,Q_k]$.
+    \item \label{en:yen_finfin} Encontrar el camino mas corto en $\mathbf{B}$, agregarlo a $\mathbf{A}$ y eliminarlo de $\mathbf{B}$. Si $\mathbf{B}$ esta vacío, terminar el algoritmo.
+    \item Repetir pasos \ref{en:borra_aristas}-\ref{en:yen_finfin} para $k\in[2,K]$.
+\end{enumerate}
+
+Finalmente, en $\mathbf{A}$ estarán los $K$ caminos mas cortos entre el \textbf{nodo fuente} y el \textbf{nodo objetivo}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.9\linewidth]{dijkstra_graph.pdf}
+    \caption{Algoritmo de Dijkstra para calcular el camino mas corto entre pares de nodos aplicado en un grafo no dirigido y pesado de 6 nodos. El nodo inicial es el nodo A, cada arista esta marcada con su distancia asociada. Los nodos de color naranja son los nodos visitados y los grises los no visitados, cada nodo esta marcado con su distancia hacia el nodo inicial. En cada iteración se actualiza la distancia asignada de cada vecino del nodo actual y también tabla de predecesores, ubicada a la derecha.}
+    \label{fig:dijkstra_graph}
+\end{figure}
+
+\section{Medidas de comunicación en redes}
