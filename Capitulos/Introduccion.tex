@@ -1,6 +1,6 @@
 \chapter{Introducción}\label{cap:Introduccion}
 
-Se suele decir que el cerebro es la red mas compleja que conoce el humano. Un cerebro humano esta compuesto por 100 billones ($10^{11}$) neuronas conectadas por 100 trillones ($10^{14}$) sinapsis, que están organizadas en múltiples escalas espaciales y son funcionalmente interactivas en múltiples escalas temporales. Las neuronas por si mismas no pueden llevar a cabo las complejas funciones de un cerebro, pero es cuando estas se conectan y organizan un sistema nervioso cuando los pensamientos, la memoria, la conciencia y los sentimientos se vuelven realidad. Muchas patologías neuronales están asociadas a daños en la red cerebral. La ubicación, extensión y caracterización de esta alteración puede permitir predecir la gravedad de la patología así como mejorar las probabilidades de recuperación del paciente. Teniendo en cuenta esto, no es sorpresa que entender la conectividad de la red cerebral y como surgen las diversas funciones cerebrales a partir de esta sea uno de los principales objetivos de la neurociencia.
+Se suele decir que el cerebro es la red mas compleja que conoce el humano. Un cerebro humano esta compuesto por 100 mil millones ($10^{11}$)  de neuronas conectadas por 100 billones ($10^{14}$) de sinapsis, que están organizadas en múltiples escalas espaciales y son funcionalmente interactivas en múltiples escalas temporales. Las neuronas por si mismas no pueden llevar a cabo las complejas funciones de un cerebro, pero es cuando estas se conectan y organizan un sistema nervioso cuando los pensamientos, la memoria, la conciencia y los sentimientos se vuelven realidad. Muchas patologías neuronales están asociadas a daños en la red cerebral. La ubicación, extensión y caracterización de esta alteración puede permitir predecir la gravedad de la patología así como mejorar las probabilidades de recuperación del paciente. Teniendo en cuenta esto, no es sorpresa que entender la conectividad de la red cerebral y como surgen las diversas funciones cerebrales a partir de esta sea uno de los principales objetivos de la neurociencia.
 
 Las técnicas de mapeo cerebral modernas (dMRI, fMRI, EEG, MEG), permiten obtener un mapa de las conexiones anatómicas o funcionales del cerebro. Para caracterizar estos mapeos, el análisis de redes complejas es el enfoque más utilizado. En este capítulo se presentará primero una breve explicación de la anatomía cerebral, luego se introducirá el concepto de conectoma (mapeo de conexiones cerebrales) y como se obtienen conectomas estructurales usando imágenes por tensor de difusión. Se dará también una breve explicación sobre redes y algunos resultados del análisis de las mismas en el campo de la neurociencia y por último se resumirán los objetivos del proyecto integrador.
 
@@ -8,7 +8,7 @@ Las técnicas de mapeo cerebral modernas (dMRI, fMRI, EEG, MEG), permiten obtene
 \subsection{Neuronas}
 % https://www.verywellmind.com/structure-of-a-neuron-2794896
 % https://en.wikipedia.org/wiki/Neuron#Anatomy_and_histology
-Las neuronas son células capaces de recibir, procesar y transmitir información a través de señales químicas y eléctricas mediante conexiones llamadas sinapsis. Son el principal componente del sistema nervioso en la mayoría de los animales y particularmente en los humanos. Anatómicamente, están formadas por el soma o cuerpo celular, las dendritas y el axón. El axón es la parte de la neurona encargada de transmitir la información hacia otras células, mientras que las dendritas y el soma se encargan de procesarla. En la figura \ref{fig:neurona_anatomia} se muestra un esquema de la estructura anatómica de una neurona.
+Las neuronas son células capaces de recibir, procesar y transmitir información a través de señales químicas y eléctricas mediante conexiones llamadas sinapsis. Son el principal componente del sistema nervioso en la mayoría de los animales y particularmente en los humanos. Anatómicamente, están formadas por el soma o cuerpo celular, las dendritas y el axón. El axón es la parte de la neurona encargada de transmitir la información hacia otras células, mientras que es en el soma donde la señal se genera y propaga. En la figura \ref{fig:neurona_anatomia} se muestra un esquema de la estructura anatómica de una neurona.
 
 \begin{figure}[htbp]
     \centering
@@ -21,7 +21,7 @@ Las neuronas son células capaces de recibir, procesar y transmitir información
 % https://en.wikipedia.org/wiki/Nerve_tract
 % https://en.wikipedia.org/wiki/Nucleus_(neuroanatomy)
 % https://en.wikipedia.org/wiki/Human_brain
-El cerebro humano esta formado por una capa exterior llamada corteza cerebral, compuesta principalmente por materia gris, y por un centro formado por materia blanca. La materia gris es un componente formado mayormente por los soma, dendritas y sinapsis de las neuronas, mientras que la materia blanca esta formada principalmente por axones. Conociendo las funciones de los axones y el soma, dendritas y sinapsis, se puede pensar, de forma simplificada, al cerebro como núcleos de neuronas (la materia gris de la corteza) comunicadas entre si por un tramado de fibras nerviosas (la materia blanca del núcleo). En la figura \ref{fig:cerebro} se muestra una representación de la estructura cerebral humana formada por materia gris y materia blanca.
+El cerebro humano esta formado por una capa exterior llamada corteza cerebral, compuesta principalmente por materia gris, y por un centro formado por materia blanca. La materia gris esta formada mayormente por los soma, dendritas y sinapsis de las neuronas, mientras que la materia blanca esta formada principalmente por axones. Conociendo las funciones de los axones y el soma, dendritas y sinapsis, se puede pensar, de forma simplificada, al cerebro como conjuntos de neuronas (la materia gris de la corteza) comunicadas entre si por un tramado de fibras nerviosas (la materia blanca del núcleo). En la figura \ref{fig:cerebro} se muestra una representación de la estructura cerebral humana formada por materia gris y materia blanca.
 
 \begin{figure}[htbp]
     \centering
@@ -30,18 +30,34 @@ El cerebro humano esta formado por una capa exterior llamada corteza cerebral, c
     \label{fig:cerebro}
 \end{figure}
 
+\subsection{Imágenes cerebrales por resonancia magnética nuclear}
+La resonancia magnética nuclear, RMN o simplemente RM, es una herramienta que permite obtener imágenes de la anatomía y procesos fisiológicos del cuerpo humano de forma no invasiva y sin hacer uso de radiación ionizante. Las imágenes se obtienen al aplicar campos magnéticos fuertes, gradientes de campos magnéticos y ondas de radio y observar como interactúan con los diferentes tejidos del cuerpo. Entre los tipos de imágenes por RM que se pueden obtener del cerebro hay tres que serán relevantes para el desarrollo de este trabajo, las imágenes por tensor de difusión, las imágenes por RM funcional y las imágenes por RM volumétricas.
+
+
+\subsubsection{Imágenes por tensor de difusión}
+Las imágenes por tensor de difusión, ITD, permiten medir el tensor de difusión del agua en diferentes partes del cerebro, correspondientes a un píxel o vóxel en la imagen. Debido a que el agua tiende a difundir en la dirección de los tractos axonales del cerebro, conocer el tensor de difusión del agua en una zona dada, brinda información sobre la forma en que están orientados los axones en esa zona. Ya que normalmente la resolución de la imagen no es del orden del tamaño de los axones, el tensor de difusión medido en un lugar del espacio es un promedio de la contribución de varias fibras axonales presentes en ese lugar. Las ITD permiten ver como están conectadas estructuralmente las diferentes zonas del cerebro.
+
+\subsubsection{Imágenes por RM funcional}
+Las imágenes por RM funcional, IRMf, permiten medir cambios en la actividad neuronal en las diferentes partes del cerebro al detectar cambios asociados al flujo sanguíneo. Se puede medir la actividad neuronal como respuesta a un estímulo o también la actividad neuronal base de cada sujeto (fRMI en estado de reposo). Este tipo de imágenes sirve para entender las funciones que cumplen diferentes regiones del cerebro y como interactúan entre ellas en diferentes situaciones.
+
+
+\subsubsection{Imágenes por RM volumétricas}
+Las imágenes por RM volumétricas permiten capturar la estructura tridimensional del interior del cuerpo al juntar múltiples imágenes bidimensionales. Este tipo de imágenes es vital para poder identificar las diferentes regiones del cerebro, lo que permite un análisis mas profundo utilizando las IRMf o las ITD explicadas anteriormente.
+
 \section{Conectomas}
 % Introduction to Diffusion Tensor Imaging
 % Building connectomes using diffusion MRI: why, how and but - Stamatios N. Sotiropoulos1,2 | Andrew Zalesky
-Se llama conectoma al mapeo de conexiones neuronales entre regiones del cerebro humano. Las conexiones pueden ser:
+Un conectoma es una representación de las conexiones que existen entre diferentes regiones del cerebro humano. Las conexiones pueden ser:
 \begin{itemize}
-    \item Anatómicas o estructurales: representan las conexiones físicas (de materia blanca) entre regiones del cerebro.
-    \item Funcionales: describen dependencias estadísticas entre las actividades neuronales entre regiones del cerebro.
+    \item Anatómicas o estructurales: representan las conexiones físicas (de materia blanca) entre regiones del cerebro, se obtienen a partir de imágenes por tensor de difusión.
+    \item Funcionales: describen dependencias estadísticas entre las actividades neuronales entre regiones del cerebro, se obtienen a partir de las imágenes por resonancia magnética funcional.
 \end{itemize}
-Para obtener un conectoma estructural es necesario definir las regiones de interés del cerebro y obtener una medida de las fibras axonales. Las regiones de interés del cerebro se definen de acuerdo a un mapeos estándares llamados atlas cerebrales y las fibras axonales se pueden medir con imágenes por tensor de difusión y una tractografía.
 
-\subsection{Imágenes por tensor de difusión}
-Las imágenes por tensor de difusión permiten medir la difusión del agua en diferentes partes del cerebro, correspondientes a un píxel o vóxel en la imagen, al observar la variación de un campo magnético aplicado. Debido a que el agua tiende a difundir en la dirección de los tractos axonales del cerebro, conocer el tensor de difusión en una zona dada, nos brinda información sobre la dirección en que están orientados mayoritariamente los axones en esa zona. Ya que la resolución de la imagen no es del orden del tamaño de los axones, el tensor de difusión medido en un lugar del espacio es un promedio de la contribución de varias fibras axonales presentes en ese lugar.
+Para obtener un conectoma estructural es necesario dividir el cerebro en diferentes regiones de interés y obtener una medida de las fibras axonales. Las regiones de interés del cerebro se definen haciendo ajustando las imágenes por RM volumétricas de acuerdo a una división espacial estándar del cerebro llamada atlas. Las fibras axonales se pueden caracterizar al aplicar un algoritmo de reconstrucción de tractos a una ITD.
+
+\subsection{Regiones de Interés}
+Definir la forma en la que se va a dividir el cerebro en regiones de interés discretas y espacialmente contiguas no es una tarea simple. En general, se puede dividir el cerebro en diferentes partes de acuerdo a la ubicación, anatomía y funciones con las que están relacionadas. La división obtenida depende también de la escala que se utilice, en una escala mas pequeña se pueden subdividir las regiones de interés presentes en una escala mas grande. Para obtener la división en una imagen dada se usan los atlas cerebrales, que permiten mapear múltiples vóxels de la imagen del cerebro a diferentes regiones de interés de acuerdo a una división modelo basándose en la posición, forma, tamaño y estructura anatómica obtenidas con una imagen por RM volumétrica.
+
 
 \subsection{Tractografía}
 La tractografía es la reconstrucción de tractos de fibras axonales a partir de las mediciones del tensor de difusión del agua. Hay tres pasos importantes a seguir para realizar una tractografía:
@@ -50,9 +66,9 @@ La tractografía es la reconstrucción de tractos de fibras axonales a partir de
 
     \item El segundo paso es la propagación de los tractos basados en el campo de orientación axonal elegido, para esto hay varios métodos basados en interpolación o simulaciones.
 
-    \item El tercer y último paso consiste en definir el final de un tracto, para esto los dos criterios mas usados son el de baja anisotropía y el de curva cerrada. En el criterio de baja anisotropía se asume que no hay una población coherente de fibras y en el de curva cerrada que la resolución de la imagen no es suficiente para detectar una curva de ese tipo. En la figura \ref{fig:tractografia_criterios} se muestra la forma en que termina la propagación de tractos de acuerdo a los dos criterios mencionados.
-
+    \item El tercer y último paso consiste en definir el final de un tracto, para esto los dos criterios mas usados son el de baja anisotropía y el de curva cerrada. En el criterio de baja anisotropía se asume que no hay una población coherente de fibras y en el de curva cerrada que la resolución de la imagen no es suficiente para detectar una curva de ese tipo. En la figura \ref{fig:tract_propagation} se muestra la forma en que termina la propagación de tractos de acuerdo a los dos criterios mencionados.
 \end{itemize}
+
 
 
 \begin{figure}[h]
@@ -71,19 +87,19 @@ La tractografía es la reconstrucción de tractos de fibras axonales a partir de
     \label{fig:tractografia_criterios}
 \end{figure}
 
-\subsection{Regiones de Interés}
-Definir la forma en la que se va a dividir el cerebro en regiones de interés discretas y espacialmente contiguas no es una tarea simple. En general, se puede dividir el cerebro en diferentes partes de acuerdo a la ubicación, anatomía y funciones con las que están relacionadas. La división obtenida depende también de la escala que se utilice, en una escala mas pequeña se pueden subdividir las regiones de interés presentes en una escala mas grande. Para obtener la división en una imagen dada se usan los atlas cerebrales, que permiten mapear múltiples vóxels de la imagen del cerebro a diferentes regiones de interés de acuerdo a una división modelo basándose en la posición, forma, tamaño y estructura anatómica.
 
 \subsection{Construyendo un conectoma}
-Una vez hecha la tractografía y la parcelación queda reconstruir las conexiones entre las diferentes regiones de interés. Lo mas común para este caso es asignarle a la conexión entre dos regiones un numero que dependa de la cantidad de tractos reconstruidos que las unan. También es común normalizar por el tamaño de cada región y por la fiabilidad de los tractos reconstruidos, de acuerdo a la anisotropía del tensor de difusión en casa vóxel que los conforman.
+Una vez hecha la tractografía y la parcelación queda reconstruir las conexiones entre las diferentes regiones de interés. En esta instancia es común el uso de algoritmos de posprocesado de tractografía que permiten obtener un número de fibras reconstruidas que sea valido como marcador biológico como el algoritmo SIFT2 \cite{SIFT2}.
 
 \section{Análisis de redes cerebrales}
-Las redes o grafos son una forma de modelar matemáticamente diversos sistemas complejos formados por elementos fundamentales conectados entre si. Una red esta formada por un conjunto de nodos y conexiones o aristas entre pares de nodos. En el caso de redes cerebrales, los nodos representan a las regiones de interés de un conectoma y las aristas a las conexiones estructurales o funcionales que fueron obtenidas entre esas regiones con los métodos explicados anteriormente. El análisis de redes cerebrales ha llevado a diversos resultados importantes, Goñi et al. pudo predecir con bastante precisión la conectividad funcional utilizando medidas de comunicación sobre conectomas estructurales \cite{GoniFunctionalPrediction} y Crofts et al. encontró diferencias sustanciales en las redes estructurales de pacientes que sufrieron un accidente cerebrovascular \cite{CroftsStroke}. Estos resultados demuestran que el análisis de redes cerebrales puede ser una herramienta de suma importancia para caracterizar patologías y entender mejor como funciona el cerebro.
+Las redes o grafos son una forma de modelar matemáticamente diversos sistemas complejos formados por elementos fundamentales conectados entre si. Una red esta formada por un conjunto de nodos y conexiones o aristas entre pares de nodos. En el caso de redes cerebrales, estas son representadas por los conectomas, los nodos representan a las regiones de interés y las aristas a las conexiones estructurales o funcionales que fueron obtenidas entre esas regiones con los métodos explicados anteriormente. El análisis de redes cerebrales ha llevado a diversos resultados importantes, Goñi et al. \cite{GoniFunctionalPrediction} pudieron predecir con bastante precisión la conectividad funcional utilizando medidas de comunicación sobre conectomas estructurales y Crofts et al. \cite{CroftsStroke} encontraron diferencias sustanciales en las redes estructurales de pacientes que sufrieron un accidente cerebrovascular . Estos resultados demuestran que el análisis de redes cerebrales puede ser una herramienta de suma importancia para caracterizar patologías y entender mejor como funciona el cerebro.
 
 \section{Objetivos y materiales}
-El objetivo principal del presente proyecto es el de aplicar medidas de comunicación de redes complejas sobre conectomas estructurales buscando diferencias entre una población de pacientes con migraña crónica y una población de controles sanos. Para esto, se utilizan técnicas de análisis de redes complejas.
+El primer objetivo del proyecto es caracterizar la validez o confiabilidad de un conectoma estructural obtenido. Debido a las diferentes fuentes de ruido y los diferentes métodos usados para obtener un conectoma, muchas veces se consideran a las conexiones débiles obtenidas como conexiones espurias y se eliminan de la red previo al análisis de la misma. No esta establecido que esta practica, conocida como podado o \textit{pruning}, sea correcta y aporte algún valor apreciable al análisis de redes cerebrales, es por esto que evaluar el impacto que tiene sobre diferentes propiedades topológicas de las mismas es de utilidad para buscar un consenso al respecto.
+
+El segundo y principal objetivo de este trabajo es el de aplicar diferentes medidas de comunicación a redes cerebrales estructurales para detectar diferencias entre una población de pacientes con migraña crónica y una población de personas sanas. Las medidas a probar son medidas usadas en estudios previos que han permitido caracterizar o predecir propiedades biológicas o matemáticas de redes cerebrales. En este sentido también se busca explorar diferentes filosofías de comunicación comúnmente usadas en redes cerebrales, ruteo o difusión.
 
 \subsection{Materiales y herramientas}
-El material con el que se trabajó en el presente proyecto consiste en matrices de conexión estructural correspondientes a 72 pacientes con migraña episódica, 69 pacientes con migraña crónica y 62 sujetos de control.
+El material con el que se trabajó en el presente proyecto consiste en matrices de conexión estructural correspondientes a 72 pacientes con migraña episódica, 69 pacientes con migraña crónica y 62 sujetos de control. Todos los datos fueron recolectados por Planchuelo-Gómez et al \cite{Planchuelo}. Los pacientes fueron reclutados en la unidad de dolores de cabeza del Hospital Clínico Universitario de Valladolid (Valladolid, España) y los sujetos de control fueron reclutados entre colegas y avisos en el hospital y la universidad.
 
 El análisis de las redes cerebrales se realizó en el lenguaje de programación \textbf{Python 3} utilizando las librerías \textbf{Networkx} y \textbf{Numpy} principalmente.

@@ -15,6 +15,26 @@
 \usepackage{subcaption}
 \usepackage{multicol}
 \usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+
+\newcommand{\matr}[1]{#1} % por si pinta cambiar la notación de mattrices
+
+% esto de aca abajo es para poder referencia a simbolos = en las ecuaciones, lo saque de https://tex.stackexchange.com/questions/439768/put-reference-above-equal-sign-and-refer-to-it
+%%%
+\newcounter{relctr} %% <- counter for relations
+\everydisplay\expandafter{\the\everydisplay\setcounter{relctr}{0}} %% <- reset every eq
+\renewcommand*\therelctr{\alph{relctr}} %% <- label format
+\newcommand\labelrel[2]{%
+  \begingroup
+    \refstepcounter{relctr}%
+    \stackrel{\textnormal{(\alph{relctr})}}{\mathstrut{#1}}%
+    \originallabel{#2}%
+  \endgroup
+}
+\AtBeginDocument{\let\originallabel\label} %% <- store original definition
+%%%
+
 %\usepackage{hyphen-spanis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%% Informacion sobre la tesis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

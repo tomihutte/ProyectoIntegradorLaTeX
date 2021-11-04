@@ -1,0 +1,46 @@
+\babel@toc {spanish}{}
+\contentsline {chapter}{\'{I}ndice de s{\'{\i }}mbolos}{\es@scroman {v}}{section*.1}%
+\contentsline {chapter}{\'{I}ndice de contenidos}{\es@scroman {vii}}{section*.3}%
+\contentsline {chapter}{Resumen}{\es@scroman {ix}}{section*.5}%
+\contentsline {chapter}{Abstract}{\es@scroman {xi}}{section*.7}%
+\babel@toc {english}{}
+\babel@toc {spanish}{}
+\babel@toc {english}{}
+\babel@toc {spanish}{}
+\contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Cerebro humano}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Neuronas}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Anatomía del cerebro humano}{1}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Imágenes cerebrales por resonancia magnética nuclear}{2}{subsection.1.1.3}%
+\contentsline {subsubsection}{Imágenes por tensor de difusión}{2}{section*.11}%
+\contentsline {subsubsection}{Imágenes por RM funcional}{3}{section*.12}%
+\contentsline {subsubsection}{Imágenes por RM volumétricas}{3}{section*.13}%
+\contentsline {section}{\numberline {1.2}Conectomas}{3}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Regiones de Interés}{3}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Tractografía}{4}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Construyendo un conectoma}{4}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Análisis de redes cerebrales}{4}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Objetivos y materiales}{4}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Materiales y herramientas}{6}{subsection.1.4.1}%
+\contentsline {chapter}{\numberline {2}Redes}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Clasificación de grafos y matriz de adyacencia.}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Comunicación en redes}{8}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Ruteo}{8}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Difusión}{10}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Cálculo de caminos mas cortos}{10}{subsection.2.2.3}%
+\contentsline {subsubsection}{Algoritmo de Dijkstra}{10}{section*.16}%
+\contentsline {subsubsection}{Algoritmo de Yen}{11}{section*.17}%
+\contentsline {section}{\numberline {2.3}Medidas de comunicación en redes}{12}{section.2.3}%
+\contentsline {subsubsection}{Notación}{12}{section*.19}%
+\contentsline {subsubsection}{Probabilidad de un camino}{12}{section*.20}%
+\contentsline {subsection}{\numberline {2.3.1}Eficiencia de Ruteo}{12}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Eficiencia de Difusión}{14}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Comunicabilidad}{14}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Distancia de K-caminos}{15}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Centralidad de nodos y aristas}{16}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}\textit {Searh information}}{16}{subsection.2.3.6}%
+\contentsline {subsection}{\numberline {2.3.7}Matriz de acoplamiento}{16}{subsection.2.3.7}%
+\contentsline {chapter}{\numberline {A}Apéndice I}{17}{appendix.Alph1}%
+\contentsline {chapter}{Bibliograf{\'{\i }}a}{19}{section*.21}%
+\contentsline {chapter}{Publicaciones asociadas}{21}{section*.23}%
+\contentsline {chapter}{Agradecimientos}{23}{section*.25}%

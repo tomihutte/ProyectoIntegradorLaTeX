@@ -7,20 +7,21 @@ En este capítulo se dará una introducción a teoría de grafos, primero viendo
 
 Los grafos se clasifican de acuerdo al tipo de conexiones tengan. Las conexiones pueden ser binarias, es decir que existe o no existe conexión, o pueden tener un peso asociado, en este caso, si la conexión existe, el peso puede significar la fuerza o importancia de la conexión. También pueden diferenciarse las conexiones en caso de que sean no dirigidas, es decir que la conexión que hay entre dos nodos es simétrica, o dirigidas, en este caso las conexiones son asimétricas. En la figura \ref{fig:tipos_grafos} se muestran representaciones gráficas de los diferentes tipos de grafos de acuerdo a sus conexiones.
 
-Una de las formas mas simples y útiles de representar un grafo es la matriz de adyacencia. La matriz de adyacencia $A$ define la topología de un grafo representando a los nodos como  filas y columnas y a las aristas como los valores presentes en la matriz. Es decir, el valor $a_{ij}$ (fila i y columna j de la matriz) representa la conexión desde el nodo $i$ hacia el nodo $j$ del grafo, si $a_{ij}=1$ quiere decir que existe una arista que une al nodo $i$ con el $j$, si $a_{ij}=0$ no hay arista desde el nodo $i$ hasta al nodo j. A dos nodos que estén conectados directamente (que exista una arista entre ellos) se los conoce como nodos vecinos. Es normal hacer una diferencia entre la matriz de adyacencia $A$ y la matriz de pesos $W$, mientras que la matriz de adyacencia representa la existencia o no de aristas, el elemento $w_{ij}$ de la matriz de pesos representa las aristas con sus pesos. En el caso de un grafo binario $w_{ij}=a_{ij}$ ya que el peso de una arista siempre es 1, mientras que en un grafo pesado no necesariamente se cumple esta igualdad. En el caso de un grafo no dirigido $a_{ij}=a_{ji}$ y $w_{ij}=w_{ji}$, por la simetría de la conexión, mientras que en un grafo dirigido esta igualdad no necesariamente se cumple. En la figura \ref{fig:tipos_grafos} se muestran los diferentes tipos de grafos con su representación gráfica y su matriz de pesos al lado.
+Una de las formas mas simples y útiles de representar un grafo es la matriz de adyacencia. La matriz de adyacencia $A$ define la topología de un grafo representando a los nodos como  filas y columnas y a las aristas como los valores presentes en la matriz. Es decir, el valor $a_{ij}$ (fila i y columna j de la matriz) representa la conexión desde el nodo $i$ hacia el nodo $j$ del grafo, si $a_{ij}=1$ quiere decir que existe una arista que une al nodo $i$ con el $j$, si $a_{ij}=0$ no hay arista desde el nodo $i$ hacia al nodo $j$. A dos nodos que estén conectados directamente (que exista una arista entre ellos) se los conoce como nodos vecinos. Es normal hacer una diferencia entre la matriz de adyacencia $A$ y la matriz de pesos $W$, mientras que la matriz de adyacencia representa la existencia o no de aristas, el elemento $w_{ij}$ de la matriz de pesos representa las aristas con sus pesos. En el caso de un grafo binario $w_{ij}=a_{ij}$ ya que el peso de una arista siempre es 1, mientras que en un grafo pesado no necesariamente se cumple esta igualdad. En el caso de un grafo no dirigido $a_{ij}=a_{ji}$ y $w_{ij}=w_{ji}$, por la simetría de la conexión, mientras que en un grafo dirigido esta igualdad no necesariamente se cumple. En la figura \ref{fig:tipos_grafos} se muestran los diferentes tipos de grafos con su representación gráfica y su matriz de pesos al lado.
 
-Definidas las matrices de adyacencia y pesos, se puede definir el grado y el grado pesado de un nodo:
+Definidas las matrices de adyacencia y pesos, se puede definir el grado y el grado pesado de un nodo para grafos no dirigidos binarios o pesados :
 
 \begin{multicols}{2}
     \begin{equation}
         k_{i} = \sum_{j \in N} a_{ij}
     \end{equation}\break
     \begin{equation}
-        k_{w_i} = \sum_{j\in N} w_{ij}
+        \label{eq:node_strength}
+        s_{i} = \sum_{j\in N} w_{ij}
     \end{equation}
 \end{multicols}
 
-donde $N$ es el conjunto de todos los nodos del grafo, $k_{i}$ es el grado del nodo $i$ y $k_{w_i}$ es el grado pesado del nodo $i$.
+donde $N$ es el conjunto de todos los nodos del grafo, $k_{i}$ es el grado del nodo $i$ y $s_{i}$ es el grado pesado o ``fuerza'' del nodo $i$.
 
 \begin{figure}[htbp]
     \centering
@@ -31,23 +32,23 @@ donde $N$ es el conjunto de todos los nodos del grafo, $k_{i}$ es el grado del n
 
 
 \section{Comunicación en redes}
-Como se dijo en el Capítulo \ref{cap:Introduccion}, lo que hace posible que el cerebro pueda cumplir todas sus complejas funciones es la comunicación y organización que surge entre las neuronas que lo componen. Es por esto que es importante entender que información se puede obtener de un grafo sobre la comunicación del sistema que representa, en este caso la red cerebral. La forma de medir comunicación en redes es a través de los caminos, un camino es una secuencia de aristas y nodos que une a dos nodos de una red. La distancia de un camino es la suma de las distancias de las aristas que lo componen. En un grafo binario, la distancia asociada a una arista es 1 y la distancia de un camino es el número de aristas atravesadas. En un grafo pesado, la distancia asociada a una arista es alguna función del peso de la misma, la forma de elegir esta función depende de la situación y no es trivial. En redes cerebrales estructurales, donde el peso de las conexiones representa el número de tractos axonales que unen a dos regiones, es razonable elegir una métrica decreciente con el peso de la conexión, es decir, que mientras mas grande sea el peso, menor sea la distancia asociada a esa arista. De esta forma, si dos regiones están unidas por una gran cantidad de tractos de materia blanca (un peso alto) la distancia entre esas regiones es baja (la función evaluada en ese peso es chica). Para medir la forma en que dos nodos de una red se comunican existen dos modelos diferentes: ruteo y difusión.
+Como se dijo en el Capítulo \ref{cap:Introduccion}, lo que hace posible que el cerebro pueda cumplir todas sus complejas funciones es la comunicación y organización que surge entre las neuronas que lo componen. Es por esto que es importante entender que información se puede obtener de un grafo sobre la comunicación del sistema que representa, en este caso la red cerebral. La capacidad de comunicarse de dos nodos de una red esta condicionada por los caminos que los conecten. Un camino es una secuencia de aristas $\rho$ y nodos $\Omega$ que une a dos nodos de una red. Se dice que un camino es sin bucles cuando ninguno de los nodos que lo conforman esta repetido. Una característica importante de un camino es su longitud, la longitud de un camino es la suma de las distancias de las aristas que lo componen. En un grafo binario, la distancia asociada a una arista es 1 y la longitud de un camino es el número de aristas atravesadas. En un grafo pesado, la distancia asociada a una arista es alguna función del peso de la misma, la forma de elegir esta función depende de la red y no es trivial. En redes cerebrales estructurales, donde el peso de las conexiones representa el número de tractos axonales que unen a dos regiones, es razonable elegir una métrica decreciente con el peso de la conexión, es decir, que mientras mas grande sea el peso, menor sea la distancia asociada a esa arista. De esta forma, si dos regiones están unidas por una gran cantidad de tractos de materia blanca (un peso alto) la distancia entre esas regiones es baja (la función evaluada en ese peso es chica). Para medir la forma en que dos nodos de una red se comunican existen dos modelos diferentes: ruteo y difusión.
 
-\subsection{Ruteo}
-El modelo de ruteo supone que la propagación de una señal de entre dos nodos ocurre a través del camino mas corto que los une. El camino más corto entre las regiones $i$ y $j$ de la red se denota como $\rho_{ij}$ y $l_{ij}$ la distancia de este camino. De esta forma:
-\begin{equation}
+\subsection{Ruteo}\label{subsec:ruteo}
+El modelo de ruteo supone que la propagación de una señal de entre dos nodos ocurre a través del camino mas corto que los une. El camino mas corto entre las regiones $i$ y $j$ de una red se denota como $\pi_{ij}$, mientras que la secuencia de aristas y nodos que lo conforman son $\rho_{ij}$ y $\Omega_{ij}$ respectivamente. La longitud de este camino, $l_{ij}$, viene dada por:
+\begin{equation}\label{eq:path_length}
     l_{ij} = \sum_{w_{nm}\in \rho_{ij}}f\left( w_{nm} \right),
 \end{equation}
-donde $w_{nm}$ es el peso de la arista que une al nodo n con el nodo m. En el caso de una red binaria, $f$ es la identidad y $l_{ij}$ es el numero de aristas que componen al camino. La distancia entre dos nodos de la red se define como la distancia del camino mas corto que los une, de esta forma $l_{ij}$ es la distancia entre el nodo $i$ y el nodo $j$ de la red. En la sección \ref{ssec:algoritmos} se introduce el algoritmo de Dijkstra, usado para calcular el camino mas corto entre dos nodos de una red.
+donde $w_{nm}$ es el peso de la arista que une al nodo n con el nodo m. En el caso de una red binaria, $f$ es la identidad y $l_{ij}$ es el numero de aristas que componen al camino. La distancia entre dos nodos de la red se define como la longitud del camino mas corto que los une, de esta forma $l_{ij}$ es la distancia entre el nodo $i$ y el nodo $j$ de la red. En la sección \ref{subsec:algoritmos} se introduce el algoritmo de Dijkstra, usado para calcular el camino mas corto entre dos nodos de una red.
 
 El uso de caminos mas cortos para propagar señales es claramente mas eficiente, al usar caminos cortos, la señal llega mas rápido y es menos probable que se pierda o que se llene de ruido. Sin embargo, esta suposición implica que cada elemento de la red, o neurona, tiene conocimiento sobre la topología global de la misma. ¿Cómo puede saber una neurona cual es la ruta mas corta para enviar una señal a otra neurona? Es improbable que lo sepa y es por esto que surge otro modelo sobre transmisión de señales cerebrales, el modelo de difusión.
 
 \subsection{Difusión}
-En contraste con el modelo de ruteo, el modelo de difusión supone que las señales cerebrales se transmiten mediante un proceso de difusión. En un proceso de difusión las señales no viajan a través de los caminos mas cortos o a través de un camino en particular, si no que se propagan de forma dispersiva, a través de múltiples frentes, usando varios caminos diferentes a la vez y sin un destino único. En un modelo de difusión, la información enviada desde un nodo puede llegar a varios destinos a través de varios caminos diferentes, la difusión puede ser pensada como un proceso de \textit{broadcasting}.
+En contraste con el modelo de ruteo, el modelo de difusión supone que las señales cerebrales se transmiten mediante un proceso de difusión. En un proceso de difusión las señales no viajan a través de los caminos mas cortos o a través de un camino en particular, si no que se propagan de forma dispersiva, a través de múltiples frentes, usando varios caminos diferentes a la vez y sin un destino único. La información enviada desde un nodo puede llegar a varios destinos a través de varios caminos diferentes, la difusión puede ser pensada como un proceso de \textit{broadcasting}. Las señales enviadas siguen la lógica de un caminante aleatorio o \textit{random walker} ya que no conocen la ruta a otro nodo y simplemente se transmiten de acuerdo a la topología local de la red.
 
-En un contexto de propagación de señales por difusión, los caminos mas cortos no son los únicos relevantes para caracterizar que tan comunicados están dos nodos de la red. Todos los caminos que existan son sirven caracterizar la comunicación entre ellos. Sin embargo, la cantidad de caminos que existen entre dos nodos nodos aumenta de forma factorial con el tamaño del grafo, por esto se suele usar el conjunto de los $K$ caminos mas cortos. En la sección \ref{ssec:algoritmos} se introducirá el algoritmo de Yen que sirve para obtener los $K$ caminos mas cortos entre un nodo fuente y un nodo objetivo.
+En un contexto de propagación de señales por difusión, los caminos mas cortos no son los únicos relevantes para caracterizar que tan comunicados están dos nodos de la red. Todos los caminos que existan son sirven caracterizar la comunicación entre ellos. Sin embargo, la cantidad de caminos que existen entre dos nodos nodos aumenta de forma factorial con el tamaño del grafo, por esto se suele usar el conjunto de los $K$ caminos mas cortos. En la sección \ref{subsec:algoritmos} se introducirá el algoritmo de Yen que sirve para obtener los $K$ caminos mas cortos entre un nodo fuente y un nodo objetivo.
 
-\subsection{Cálculo de caminos mas cortos}\label{ssec:algoritmos}
+\subsection{Cálculo de caminos mas cortos}\label{subsec:algoritmos}
 
 \subsubsection{Algoritmo de Dijkstra}
 El algoritmo de Dijkstra es el algoritmo para calcular caminos mas cortos en grafos más usado. Fue concebido por el científico de la computación Edsger Dijkstra en 1956. El algoritmo es iterativo, en cada iteración se actualizan las distancias entre un nodo inicial (definido por el usuario) y cada uno de los nodos restantes del grafo. En principio a cada nodo se le asigna un valor que representa la distancia al \textbf{nodo inicial} y el algoritmo busca disminuir este valor. Los pasos del algoritmo son:
@@ -65,7 +66,7 @@ El algoritmo de Dijkstra es el algoritmo para calcular caminos mas cortos en gra
 Al finalizar el algoritmo, cada nodo tiene asignada la distancia hacia el \textbf{nodo inicial} y se puede reconstruir el camino mas corto con la \textbf{tabla de predecesores}. En el caso de que la distancia asignada a un nodo sea infinito, quiere decir que ese nodo no puede ser accedido desde el \textbf{nodo inicial}, es decir, no existe ningún camino que los una. En la figura \ref{fig:dijkstra_graph} se muestra una representación grafica del algoritmo en un grafo pesado no dirigido.
 
 \subsubsection{Algoritmo de Yen}
-El algoritmo de Yen es un algoritmo utilizado para obtener los $K$ caminos mas cortos sin bucles que existen entre un \textbf{nodo fuente} y un \textbf{nodo objetivo}. Fue publicado por Jin Y. Yen en 1971. Utiliza algún algoritmo para obtener el camino mas corto a partir del cual busca las $K-1$ desviaciones mas cortas. Para explicar como funciona el algoritmo, primero es necesario establecer algunas definiciones:
+El algoritmo de Yen es un algoritmo utilizado para obtener los $K$ caminos sin bucles mas cortos  que existen entre un \textbf{nodo fuente} y un \textbf{nodo objetivo}. Fue publicado por Jin Y. Yen en 1971. Utiliza algún algoritmo para obtener el camino mas corto a partir del cual busca las $K-1$ desviaciones mas cortas. Para explicar como funciona el algoritmo, primero es necesario establecer algunas definiciones:
 
 \begin{description}[font=\sffamily\bfseries, itemindent=0.125cm]
     \item[$\mathbf{N}$:] Número de nodos que contiene el grafo.
@@ -91,7 +92,7 @@ Los pasos del algoritmo son:
     \item Repetir pasos \ref{en:borra_aristas}-\ref{en:yen_finfin} para $k\in[2,K]$.
 \end{enumerate}
 
-Finalmente, en $\mathbf{A}$ estarán los $K$ caminos mas cortos entre el \textbf{nodo fuente} y el \textbf{nodo objetivo}.
+Finalmente, en $\mathbf{A}$ estarán los $K$ caminos mas cortos entre el \textbf{nodo fuente} y el \textbf{nodo objetivo}. Si la cantidad de caminos es menor que $K$, el algoritmo devolverá todos los caminos que haya disponibles.
 
 \begin{figure}[htbp]
     \centering
@@ -101,3 +102,95 @@ Finalmente, en $\mathbf{A}$ estarán los $K$ caminos mas cortos entre el \textbf
 \end{figure}
 
 \section{Medidas de comunicación en redes}
+
+Ya introducidas las redes, su representación y los diferentes enfoques que existen sobre comunicación, surge la pregunta, ¿de que forma podemos medir la comunicación en redes? Esta es una respuesta abierta y posiblemente las respuestas sean incontables, sin embargo, en esta sección, se introducirán algunas (contables) medidas que permiten capturar en cierta forma la comunicación de una red.
+
+\subsubsection{Notación}
+\begin{description}[font=\sffamily\bfseries, itemindent=0.125cm]
+    \item[$N$:] Conjunto de nodos del grafo, $\left| N\right|$ es el número de nodos, también conocido como tamaño del grafo.
+    \item[]
+\end{description}
+
+\subsubsection{Probabilidad de un camino}
+La probabilidad asociada a un camino $\rho$ es una medida intrínsecamente asociada a un modelo de comunicación por difusión ya que refleja la probabilidad de que un \textit{random wallker} tome el camino en cuestión. Viene dada por
+\begin{equation}\label{eq:path_prob}
+    P(\pi)=\prod_{i=0}^{|\rho|}\frac{\rho^i}{s_{\Omega^i}},
+\end{equation}
+donde $\rho^i$ representa la $i$-ésima arista y $s_{\Omega^i}$, definida en \ref{eq:node_strength}, la fuerza del $i$-ésimo nodo del camino $\pi$. Cabe destacar que el numero de aristas del camino $|\rho|$ es menor al número de nodos, por lo que \ref{eq:path_prob} excluye al último nodo del camino, el nodo donde termina y es por esto que la probabilidad de un camino entonces depende del orden en el que se recorre el mismo.
+
+\subsection{Eficiencia de Ruteo}
+
+La eficiencia de ruteo es una medida que sirve para capturar que tan integrada esta una red a través de los caminos mas cortos. Se calcula de la forma:
+\begin{equation}
+    E_{R} = \frac{1}{|N|\left( |N|-1 \right)}\sum_{i\neq j \in N}\frac{1}{l_{ij}},
+\end{equation}
+donde $l_{ij}$ es la longitud del camino mas corto entre el nodo $i$ y el nodo $j$, definida en la ecuación \ref{eq:path_length}. Es decir que $E_{R}$ es el valor medio de la inversa de la distancia entre todos los pares de nodos. Cuanto mayor sea $E_{R}$, mas cerca se encuentran los nodos de la red entre si.
+
+\subsection{Eficiencia de Difusión}
+En un contexto de comunicación por difusión, las señales no viajan a través de los caminos mas cortos, si no que siguen una lógica de caminata aleatoria. Entonces, para medir que tan eficientemente conectada esta una red, no sirve una medida basada en caminos mas cortos. Goñi et al (2013) \cite{GoniMorphospace} propusieron una medida de la eficiencia de comunicación en un contexto de difusión a la que llamaron eficiencia de difusión y se calcula de la forma:
+\begin{equation}
+    E_{D}=\frac{1}{|N|\left( |N|-1 \right)}\sum_{i\neq j \in N}\frac{1}{\left\langle X_{ij} \right\rangle},
+\end{equation}
+donde $\left\langle X_{ij} \right\rangle$ es el numero medio de aristas que un \textit{random walker} tiene que atravesar para llegar desde el nodo $i$ hacia el nodo $j$. Es decir, cuanto menos aristas se atraviesen en media en una caminata aleatoria entre los nodos de la red, mas eficientemente integrada estará según $E_{D}$. Para poder calcular $\left\langle X_{ij} \right\rangle$ es necesario hacer uso de la matriz $\matr{U}$ definida:
+
+\begin{align}\label{eq:UandS}
+    \matr{U}=\matr{W^{T}}\matr{S}^{-1} &  & \wedge &  & S=\begin{bmatrix}
+        s_1 & 0      & \cdots & 0       \\0
+            & s_2    & \cdots & 0       \\\vdots
+            & \vdots & \ddots & \vdots  \\0
+            & 0      & \cdots & s_{|N|}
+    \end{bmatrix},
+\end{align}
+donde \matr{W} es la matriz de pesos del grafo y $s_i$ es el grado pesado de un nodo definido en \ref{eq:node_strength}. El elemento $u_{ji}=w_{ij}/s_{j}$ se define como la probabilidad de que un caminante aleatorio ubicado en el nodo $i$ se mueva hacia el nodo $j$. Se puede ver que $\matr{U}^{\textrm{H}}$ expresa las probabilidades de que un caminante aleatorio llegue de un nodo hacia otro en H pasos. Es decir, $\left[ \matr{U}^{\textrm{H}} \right]_{ji}$ expresa la probabilidad de que una señal que sigue una caminata aleatoria vaya desde el nodo $i$ hacia el nodo $j$  atravesando exactamente $H$ aristas. Definiendo $\matr{U_j}$ como la matriz $\matr{U}$ con todos los elementos de la fila $j$-ésmia puestos a cero, es decir $\left[ \matr{U}_j \right]_{ji}=0$ $\forall$ $i \in N$, se puede calcular:
+
+\begin{equation}\label{eq:mean_hops}
+    \left\langle  X_{ij} \right\rangle=\sum_{t=0}^{\infty}tP\left( X_{ij}=t \right)\labelrel={eq:mean_hops:1}\sum_{t=0}^{\infty}P\left( X_{ij} >t\right)\labelrel={eq:mean_hops:2}\sum_{t=0}^{\infty}\sum_{n=1}^{|N|}\left[ U_{j}^t \right]_{ni}=\sum_{n=1}^{|N|}\left[ \left( 1-\matr{U}_j \right)^{-1} \right]_{ni}
+\end{equation}
+
+La igualdad~\eqref{eq:mean_hops:1} viene por la propiedad de que el valor medio de una variable aleatoria discreta positiva es igual a la suma de la función cumulativa complementaria. Es necesario recordar que una señal puede atravesar infinitas aristas en su camino del nodo $i$ al nodo $j$, por eso la sumatoria va hasta infinito. La igualdad~\eqref{eq:mean_hops:2} viene por el hecho de que la matriz $\matr{U_j}^t$ representa las probabilidades de que un mensaje que sigue una caminata aleatoria atraviese exactamente $t$ aristas en su camino entre pares de nodos de la red sin la opción de ir al nodo $j$. El elemento $\left[ \matr{U_j}^{\textrm{t}} \right]_{ni}$ es la probabilidad de que un caminante aleatorio llegue desde el nodo $i$ hacia el nodo $n$ en exactamente $t$ pasos sin pasar por el nodo $j$ en su camino. Entonces $\sum_{n=1}^{|N|}\left[\matr{U_j^t}\right]_{ni}$ representa la probabilidad de que un mensaje salga del nodo $i$, no haya pasado por el nodo $j$ y este en cualquier otro nodo diferente a $j$ después de atravesar $t$ aristas en su caminata aleatoria, que es igual a la probabilidad de que no haya llegado al nodo $j$ después de $t$ aristas.
+
+\subsection{Comunicabilidad}
+La comunicabilidad es una medida propuesta por Estrada y Hatano (2008) \cite{EstradaCommunicability} que esta enmarcada en un contexto de flujo de información por difusión. Esta medida tiene en cuenta todos los caminos posibles entre pares de nodos y se define
+\begin{equation}
+    C_{ij}=\sum_{n=0}^{\infty}\frac{\left[ A^n \right]_{ij}}{n!}=\left[ e^{A} \right]_{ij},
+\end{equation}
+donde $\matr{A}$ es la matriz de adyacencia (binaria) del grafo. Esta medida se basa en que $\left[ A^n \right]_{ij}$ es el número total de caminos entre el nodo i y el nodo j compuestos por $n$ aristas. La comunicabilidad entonces, es la suma pesada del numero total de caminos entre pares de nodos, con un peso inversamente proporcional al factorial del numero de aristas que componen los componen. Crofts y Higham (2009) \cite{CroftsCommunicability} generalizaron la medida para ser utilizada en la matriz de pesos $\matr{W}$ de la forma
+
+\begin{equation}
+    C_{ij}=\left[ \exp{ \left( \matr{S}^{-1/2} \matr{W}\matr{S}^{-1/2} \right) } \right]_{ij}
+\end{equation}
+
+donde se usa la matriz $S$, definida en \ref{eq:UandS}, como normalización para regular la influencia de nodos con alta fuerza. En este caso la comunicabilidad ya no es la suma pesada de la cantidad de caminos entre dos nodos, si no que esta relacionada a las probabilidades de los caminos existentes. La comunicabilidad pesada fue usada por Crofts et al \cite{CroftsStroke} para encontrar cambios en la conectividad de conectomas estructurales de pacientes que sufrieron un accidente cerebrovascular respecto a pacientes sanos.
+
+\subsection{Distancia de K-caminos}
+En la sección \ref{subsec:ruteo} se introdujo la longitud del camino mas corto como la distancia topológica entre dos nodos de una red. Sin embargo, esta medida no tiene en cuenta todas las posibilidades de flujo de información paralela que presenta una red y que son explotadas en un modelo de difusión. Es por esto que Avena-Koenisberger et al \cite{AvenaKSPL} propusieron una extensión de esta medida para agregar la contribución de los K caminos mas cortos entre un par de nodos. Se define $\hat{D}_{Kji}$ de la forma
+\begin{equation}
+    \hat{D}_{Kij} = \sum_{k=1}^{K} \hat{P}_K\left( \pi_{ij}^k \right) l_{ij}^k,
+\end{equation}
+donde $\pi_{ij}^k$ es el $k$-ésimo camino mas corto entre los nodos $i$ y $j$ y $l_{ij}^k$ es la longitud de ese camino. $\hat{P}_K\left( \rho_{ij}^k \right)$ es la probabilidad normalizada del $k$-ésimo camino, definida como
+\begin{equation}
+    \hat{P}_K\left( \pi_{ij}^k \right) = \frac{P\left( \pi_{ij}^k \right)}{\sum_{k'=1}^{K}P\left( \pi_{ij}^{k'} \right)},
+\end{equation}
+de forma que $\sum_{k=1}^{K}\hat{P}_K\left( \pi_{ij}^k \right)=1$ y la distancia $\hat{D}_K$ sea la media pesada de las distancias de todos los $K$ caminos mas cortos, donde los pesos representan la probabilidad con la que se recorre cada uno. Para redes no dirigidas $\pi_{ij}^k$ esta compuesto por los mismos nodos y aristas que $\pi_{ji}^k$, sin embargo, como se menciono al introducir la probabilidad de un camino, $P\left( \pi_{ij}^k \right)$ no es necesariamente igual a $P\left( \pi_{ji}^k \right)$ ya que la secuencia en que se recorren estos nodos y aristas es diferente. De esta forma $\hat{D}_{Kij}$ puede ser diferente a $\hat{D}_{Kji}$, por eso se simetriza y se define la distancia de K-caminos entre un par de nodos como
+\begin{equation}
+    D_{Kij}=\frac{\hat{D}_{Kij}+\hat{D}_{Kji}}{2}=D_{Kji}.
+\end{equation}
+
+\subsection{Centralidad de nodos y aristas}
+La centralidad es una medida que captura la relevancia de cada nodo y arista en los caminos mas cortos de una red. La centralidad de nodos $NC$ y la centralidad de aristas $EC$ están definidas originalmente sobre caminos mas cortos, sin embargo, Avena-Koenisberger et al. \cite{AvenaKSPL} la extendieron para incluir los $K$ caminos mas cortos entre pares de nodos de la forma
+\begin{align}
+    NC_i        & = \frac{1}{K(|N|-1)(|N|-2)}\sum_{\substack{g\neq i \\h\neq i\\k\leq K}}\sigma\left( \Omega_{gh}^k,i \right), \\
+    EC_{ij}     & = \frac{1}{K|N|(|N|-2)} \sum_{\substack{g\neq h    \\ k\leq K }}\sigma\left( \rho_{gh}^k,w_{ij} \right),\\
+    \sigma(x,y) & =
+    \begin{cases}
+        1 & \textrm{ si } y\in x    \\
+        0 & \textrm{ en otro caso}. \\
+    \end{cases}
+\end{align}
+Así, la centralidad mide la cantidad de veces que un nodo o una arista dada es atravesada por uno de los $K$ caminos mas cortos de forma normalizada, donde una centralidad de 1 significaría que todos los caminos pasan por ese nodo/arista. Conocer $EC$ y $NC$ da información sobre la resiliencia de una red. Si hay pocos nodos o aristas muy centrales, quitarlos o afectarlos sería altamente perjudicial para la comunicación de la red, ya que se verían afectados muchas de las vías de información (caminos). En cambio, si hay valores de $EC$ y $NC$ distribuidos uniformemente, retirar algunos de los elementos de la red no afectaría mucho a la comunicación de la misma.
+
+\subsection{\textit{Search information}}
+
+
+\subsection{Matriz de acoplamiento}
+La matriz de acoplamiento $\matr{G}$ captura

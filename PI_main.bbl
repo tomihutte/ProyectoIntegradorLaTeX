@@ -1,0 +1,62 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+
+\bibitem{DTI_INTRODUCTION}
+Mori, S.
+\newblock Three-dimensional tract reconstruction.
+\newblock \underline{En}: Introduction to Diffusion Tensor Imaging, cap.~9.
+  ELSEVIER, 2007.
+
+\bibitem{SIFT2}
+Smith, R.~E., Tournier, J.-D., Calamante, F., Conelly, A.
+\newblock Sift2: Enabling dense quantitative assessment of brain white matter 2
+  connectivity using streamlines tractography.
+\newblock \emph{NeuroImage}, \textbf{119}, 338--351, 2015.
+
+\bibitem{GoniFunctionalPrediction}
+Goñi, J., \emph{et~al.}
+\newblock Resting-brain functional connectivity predicted by analytic measures
+  of network communication.
+\newblock \emph{PLOS ONE}, \textbf{8}~(3), 1--10, 2014.
+
+\bibitem{CroftsStroke}
+Crofts, J., \emph{et~al.}
+\newblock Network analysis detects changes in the contralesional hemisphere
+  following stroke.
+\newblock \emph{NeuroImage}, \textbf{54}, 161--169, 2011.
+
+\bibitem{Planchuelo}
+Planchuelo-G{\'o}mez, {\'A}., Garc{\'i}a-Azor{\'i}n, D., L~Guerrero, {\'A}.,
+  Aja-Fern{\'a}ndez, S., Rodr{\'i}guez, M., de~Luis-Garc{\'i}a, R.
+\newblock Structural connectivity alterations in chronic and episodic migraine:
+  A diffusion magnetic resonance imaging connectomics study.
+\newblock \emph{Cephalgia}, \textbf{40}~(4), 367--383, 2019.
+
+\bibitem{GoniMorphospace}
+Goñi, J., Avena-Koenigsberger, A., Velez~de Mendizabal, N., van~den Heuvel,
+  M.~P., Betzel, R.~F., Sporns, O.
+\newblock Exploring the morphospace of communication efficiency in complex
+  networks.
+\newblock \emph{PNAS}, \textbf{111}~(2), 833--838, 2013.
+
+\bibitem{EstradaCommunicability}
+Estrada, E., Hatano, N.
+\newblock Communicability in complex networks.
+\newblock \emph{Physical review. E, Statistical, nonlinear, and soft matter
+  physics}, \textbf{77}, 036111, 04 2008.
+
+\bibitem{CroftsCommunicability}
+Crofts, J., Higham, D.
+\newblock A weighted communicability measure applied to complex brain networks.
+\newblock \emph{Journal of the Royal Society, Interface / the Royal Society},
+  \textbf{6}, 411--4, 02 2009.
+
+\bibitem{AvenaKSPL}
+Avena-Koenigsberger, A., Misic, B., Hawkins, R., Griffa, A., Hagmann, P.,
+  Goñi, J., \emph{et~al.}
+\newblock Path ensembles and a tradeoff between communication efficiency and
+  resilience in the human connectome.
+\newblock \emph{Brain structure \& function}, \textbf{222}, 01 2017.
+
+\end{thebibliography}
