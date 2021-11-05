@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.11)  4 NOV 2021 16:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.11)  5 NOV 2021 17:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -584,7 +584,7 @@ LaTeX Info: Redefining \% on input line 9.
 
  (c:/Users/Tomas/Desktop/Tesis/escritura/ProyectoIntegradorLaTeX/Capitulos/Introduccion.tex
 Cap\'{\i }tulo 1.
-<figs//neurona_anatomia.png, id=236, 507.8975pt x 293.095pt>
+<figs//neurona_anatomia.png, id=240, 507.8975pt x 293.095pt>
 File: figs//neurona_anatomia.png Graphic file (type png)
 <use figs//neurona_anatomia.png>
 Package pdftex.def Info: figs//neurona_anatomia.png  used on input line 15.
@@ -597,7 +597,7 @@ Package pdftex.def Info: figs//neurona_anatomia.png  used on input line 15.
 
 
 ]
-<figs//cerebro_materia_gris_blanca.jpg, id=245, 468.75125pt x 253.94875pt>
+<figs//cerebro_materia_gris_blanca.jpg, id=249, 468.75125pt x 253.94875pt>
 File: figs//cerebro_materia_gris_blanca.jpg Graphic file (type jpg)
 <use figs//cerebro_materia_gris_blanca.jpg>
 Package pdftex.def Info: figs//cerebro_materia_gris_blanca.jpg  used on input line 28.
@@ -608,12 +608,12 @@ LaTeX Info: Redefining \% on input line 39.
 LaTeX Info: Redefining \. on input line 65.
 LaTeX Info: Redefining \% on input line 65.
  [3]
-<figs//diffusion_estimation.JPG, id=264, 1027.58907pt x 479.54156pt>
+<figs//diffusion_estimation.JPG, id=268, 1027.58907pt x 479.54156pt>
 File: figs//diffusion_estimation.JPG Graphic file (type jpg)
 <use figs//diffusion_estimation.JPG>
 Package pdftex.def Info: figs//diffusion_estimation.JPG  used on input line 77.
 (pdftex.def)             Requested size: 441.01772pt x 205.81104pt.
-<figs//tract_propagation.JPG, id=265, 1025.33063pt x 438.8897pt>
+<figs//tract_propagation.JPG, id=269, 1025.33063pt x 438.8897pt>
 File: figs//tract_propagation.JPG Graphic file (type jpg)
 <use figs//tract_propagation.JPG>
 Package pdftex.def Info: figs//tract_propagation.JPG  used on input line 82.
@@ -652,7 +652,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 17--18
 
  []
 
-<figs//tipos_grafo_2.pdf, id=300, 867.24pt x 1300.86pt>
+<figs//tipos_grafo_2.pdf, id=306, 867.24pt x 1300.86pt>
 File: figs//tipos_grafo_2.pdf Graphic file (type pdf)
 <use figs//tipos_grafo_2.pdf>
 Package pdftex.def Info: figs//tipos_grafo_2.pdf  used on input line 28.
@@ -669,38 +669,44 @@ LaTeX Info: Redefining \% on input line 63.
 LaTeX Info: Redefining \. on input line 92.
 LaTeX Info: Redefining \% on input line 92.
  [11]
-<figs//dijkstra_graph.pdf, id=419, 722.7pt x 1156.32pt>
+<figs//dijkstra_graph.pdf, id=424, 722.7pt x 1156.32pt>
 File: figs//dijkstra_graph.pdf Graphic file (type pdf)
 <use figs//dijkstra_graph.pdf>
 Package pdftex.def Info: figs//dijkstra_graph.pdf  used on input line 99.
 (pdftex.def)             Requested size: 396.91324pt x 635.06049pt.
-LaTeX Info: Redefining \. on input line 131.
-LaTeX Info: Redefining \% on input line 131.
+LaTeX Info: Redefining \. on input line 134.
+LaTeX Info: Redefining \% on input line 134.
  [12]
-LaTeX Info: Redefining \. on input line 131.
-LaTeX Info: Redefining \% on input line 131.
+LaTeX Info: Redefining \. on input line 134.
+LaTeX Info: Redefining \% on input line 134.
  [13 <c:/Users/Tomas/Desktop/Tesis/escritura/ProyectoIntegradorLaTeX/figs//dijkstra_graph.pdf>]
-LaTeX Info: Redefining \. on input line 156.
-LaTeX Info: Redefining \% on input line 156.
+LaTeX Info: Redefining \. on input line 159.
+LaTeX Info: Redefining \% on input line 159.
  [14]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 181.
-LaTeX Info: Redefining \% on input line 181.
- [15])
+LaTeX Info: Redefining \. on input line 184.
+LaTeX Info: Redefining \% on input line 184.
+ [15]
+LaTeX Info: Redefining \. on input line 208.
+LaTeX Info: Redefining \% on input line 208.
+ [16]
+LaTeX Info: Redefining \. on input line 242.
+LaTeX Info: Redefining \% on input line 242.
+ [17])
 LaTeX Info: Redefining \. on input line 91.
 LaTeX Info: Redefining \% on input line 91.
- [16]
+ [18]
 \openout2 = `Capitulos/Ap_XX.aux'.
 
  (c:/Users/Tomas/Desktop/Tesis/escritura/ProyectoIntegradorLaTeX/Capitulos/Ap_XX.tex
 Ap\'{e}ndice A.
-) [17
+) [19
 
 
 
 
-] [18
+] [20
 
 
 
@@ -708,20 +714,20 @@ Ap\'{e}ndice A.
 \tf@brf=\write5
 \openout5 = `PI_main.brf'.
 
-) [19
-
-] [20
-
-] [21
-
-
+) [21
 
 ] [22
 
 ] [23
 
 
+
 ] [24
+
+] [25
+
+
+] [26
 
 ] (c:/Users/Tomas/Desktop/Tesis/escritura/ProyectoIntegradorLaTeX/PI_main.aux
 LaTeX Info: Redefining \. on input line 26.
@@ -734,23 +740,23 @@ LaTeX Info: Redefining \. on input line 4.
 LaTeX Info: Redefining \% on input line 4.
 ) (c:/Users/Tomas/Desktop/Tesis/escritura/ProyectoIntegradorLaTeX/Capitulos/Redes.aux) (c:/Users/Tomas/Desktop/Tesis/escritura/ProyectoIntegradorLaTeX/Capitulos/Ap_XX.aux))
 Package rerunfilecheck Info: File `PI_main.out' has not changed.
-(rerunfilecheck)             Checksum: 982DF79E6DDF2B97B88AA68D9E8DFD48;5409.
+(rerunfilecheck)             Checksum: 609B832C92B73C3FD7869A6D85B39786;5661.
 Package rerunfilecheck Info: File `PI_main.brf' has not changed.
-(rerunfilecheck)             Checksum: 64E8F65CA5A4AAD19184090C81CA4A13;616.
+(rerunfilecheck)             Checksum: 5F0E7C0E7FB3F5EE7658857F1FB05917;925.
  ) 
 Here is how much of TeX's memory you used:
- 13223 strings out of 478994
- 201561 string characters out of 5862207
- 542671 words of memory out of 5000000
- 30317 multiletter control sequences out of 15000+600000
- 416548 words of font info for 71 fonts, out of 8000000 for 9000
+ 13244 strings out of 478994
+ 201871 string characters out of 5862207
+ 542888 words of memory out of 5000000
+ 30326 multiletter control sequences out of 15000+600000
+ 416189 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  113i,16n,116p,1845b,791s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on c:/Users/Tomas/Desktop/Tesis/escritura/ProyectoIntegradorLaTeX/PI_main.pdf (36 pages, 570441 bytes).
+<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on c:/Users/Tomas/Desktop/Tesis/escritura/ProyectoIntegradorLaTeX/PI_main.pdf (38 pages, 581606 bytes).
 PDF statistics:
- 697 PDF objects out of 1000 (max. 8388607)
- 519 compressed objects within 6 object streams
- 136 named destinations out of 1000 (max. 500000)
- 303 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 738 PDF objects out of 1000 (max. 8388607)
+ 558 compressed objects within 6 object streams
+ 149 named destinations out of 1000 (max. 500000)
+ 311 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
 
@@ -58,5 +58,10 @@ Avena-Koenigsberger, A., Misic, B., Hawkins, R., Griffa, A., Hagmann, P.,
 \newblock Path ensembles and a tradeoff between communication efficiency and
   resilience in the human connectome.
 \newblock \emph{Brain structure \& function}, \textbf{222}, 01 2017.
+
+\bibitem{ArenasSync}
+Arenas, A., Diaz-Guilera, A., Kurths, J., Moreno, Y., Zhou, C.
+\newblock Synchronization in complex networks.
+\newblock \emph{Physics Reports}, \textbf{469}~(3), 93--153, 12 2008.
 
 \end{thebibliography}

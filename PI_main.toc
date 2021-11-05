@@ -38,9 +38,10 @@
 \contentsline {subsection}{\numberline {2.3.3}Comunicabilidad}{14}{subsection.2.3.3}%
 \contentsline {subsection}{\numberline {2.3.4}Distancia de K-caminos}{15}{subsection.2.3.4}%
 \contentsline {subsection}{\numberline {2.3.5}Centralidad de nodos y aristas}{16}{subsection.2.3.5}%
-\contentsline {subsection}{\numberline {2.3.6}\textit {Searh information}}{16}{subsection.2.3.6}%
-\contentsline {subsection}{\numberline {2.3.7}Matriz de acoplamiento}{16}{subsection.2.3.7}%
-\contentsline {chapter}{\numberline {A}Apéndice I}{17}{appendix.Alph1}%
-\contentsline {chapter}{Bibliograf{\'{\i }}a}{19}{section*.21}%
-\contentsline {chapter}{Publicaciones asociadas}{21}{section*.23}%
-\contentsline {chapter}{Agradecimientos}{23}{section*.25}%
+\contentsline {subsection}{\numberline {2.3.6}Información de acceso}{16}{subsection.2.3.6}%
+\contentsline {subsection}{\numberline {2.3.7}Transitividad}{16}{subsection.2.3.7}%
+\contentsline {subsection}{\numberline {2.3.8}Autovalores de la matriz de acoplamiento}{17}{subsection.2.3.8}%
+\contentsline {chapter}{\numberline {A}Apéndice I}{19}{appendix.Alph1}%
+\contentsline {chapter}{Bibliograf{\'{\i }}a}{21}{section*.21}%
+\contentsline {chapter}{Publicaciones asociadas}{23}{section*.23}%
+\contentsline {chapter}{Agradecimientos}{25}{section*.25}%

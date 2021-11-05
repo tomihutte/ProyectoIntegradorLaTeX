@@ -108,15 +108,18 @@ Ya introducidas las redes, su representación y los diferentes enfoques que exis
 \subsubsection{Notación}
 \begin{description}[font=\sffamily\bfseries, itemindent=0.125cm]
     \item[$N$:] Conjunto de nodos del grafo, $\left| N\right|$ es el número de nodos, también conocido como tamaño del grafo.
-    \item[]
+    \item[$V_i$:] Conjunto de nodos vecinos al nodo $i$.
+    \item[$\pi$:] Caminos existente en la red, el $k$-ésimo camino mas corto entre nodos $i$ y $j$ se denota $\pi_{ij}^k$
+    \item[$\rho$:] Secuencia de aristas del camino $\pi$, la secuencia de aristas del camino $\pi_{ij}^k$ es $\rho_{ij}^k$
+    \item[$\Omega$:] Secuencia de nodos del camino $\pi$, la secuencia de nodos del camino $\pi_{ij}^k$ es $\Omega_{ij}^k$
 \end{description}
 
 \subsubsection{Probabilidad de un camino}
 La probabilidad asociada a un camino $\rho$ es una medida intrínsecamente asociada a un modelo de comunicación por difusión ya que refleja la probabilidad de que un \textit{random wallker} tome el camino en cuestión. Viene dada por
 \begin{equation}\label{eq:path_prob}
-    P(\pi)=\prod_{i=0}^{|\rho|}\frac{\rho^i}{s_{\Omega^i}},
+    P(\pi)=\prod_{i=0}^{|\rho|}\frac{\rho(i)}{s_{\Omega(i)}},
 \end{equation}
-donde $\rho^i$ representa la $i$-ésima arista y $s_{\Omega^i}$, definida en \ref{eq:node_strength}, la fuerza del $i$-ésimo nodo del camino $\pi$. Cabe destacar que el numero de aristas del camino $|\rho|$ es menor al número de nodos, por lo que \ref{eq:path_prob} excluye al último nodo del camino, el nodo donde termina y es por esto que la probabilidad de un camino entonces depende del orden en el que se recorre el mismo.
+donde $\rho(i)$ representa la $i$-ésima arista y $s_{\Omega(i)}$, definida en \ref{eq:node_strength}, la fuerza del $i$-ésimo nodo del camino $\pi$. Cabe destacar que el numero de aristas del camino $|\rho|$ es menor al número de nodos, por lo que \ref{eq:path_prob} excluye al último nodo del camino, el nodo donde termina. Es por esto que la probabilidad de un camino entonces depende del orden en el que se recorre el mismo.
 
 \subsection{Eficiencia de Ruteo}
 
@@ -168,7 +171,7 @@ En la sección \ref{subsec:ruteo} se introdujo la longitud del camino mas corto 
     \hat{D}_{Kij} = \sum_{k=1}^{K} \hat{P}_K\left( \pi_{ij}^k \right) l_{ij}^k,
 \end{equation}
 donde $\pi_{ij}^k$ es el $k$-ésimo camino mas corto entre los nodos $i$ y $j$ y $l_{ij}^k$ es la longitud de ese camino. $\hat{P}_K\left( \rho_{ij}^k \right)$ es la probabilidad normalizada del $k$-ésimo camino, definida como
-\begin{equation}
+\begin{equation}\label{eq:prob_norm}
     \hat{P}_K\left( \pi_{ij}^k \right) = \frac{P\left( \pi_{ij}^k \right)}{\sum_{k'=1}^{K}P\left( \pi_{ij}^{k'} \right)},
 \end{equation}
 de forma que $\sum_{k=1}^{K}\hat{P}_K\left( \pi_{ij}^k \right)=1$ y la distancia $\hat{D}_K$ sea la media pesada de las distancias de todos los $K$ caminos mas cortos, donde los pesos representan la probabilidad con la que se recorre cada uno. Para redes no dirigidas $\pi_{ij}^k$ esta compuesto por los mismos nodos y aristas que $\pi_{ji}^k$, sin embargo, como se menciono al introducir la probabilidad de un camino, $P\left( \pi_{ij}^k \right)$ no es necesariamente igual a $P\left( \pi_{ji}^k \right)$ ya que la secuencia en que se recorren estos nodos y aristas es diferente. De esta forma $\hat{D}_{Kij}$ puede ser diferente a $\hat{D}_{Kji}$, por eso se simetriza y se define la distancia de K-caminos entre un par de nodos como
@@ -189,8 +192,56 @@ La centralidad es una medida que captura la relevancia de cada nodo y arista en 
 \end{align}
 Así, la centralidad mide la cantidad de veces que un nodo o una arista dada es atravesada por uno de los $K$ caminos mas cortos de forma normalizada, donde una centralidad de 1 significaría que todos los caminos pasan por ese nodo/arista. Conocer $EC$ y $NC$ da información sobre la resiliencia de una red. Si hay pocos nodos o aristas muy centrales, quitarlos o afectarlos sería altamente perjudicial para la comunicación de la red, ya que se verían afectados muchas de las vías de información (caminos). En cambio, si hay valores de $EC$ y $NC$ distribuidos uniformemente, retirar algunos de los elementos de la red no afectaría mucho a la comunicación de la misma.
 
-\subsection{\textit{Search information}}
+\subsection{Información de acceso}
+La información de acceso o \textit{search information}, es una medida introducida por Goñi et al \cite{GoniFunctionalPrediction} que cuantifica la accesibilidad o que tan ``escondido'' esta un camino en la red. Para hacer esto mide la información necesaria para poder acceder a dicho camino. Para un par de nodos $i$-$j$ dado, la información de acceso esta definida por el camino mas corto que los une de la forma
+\begin{equation}
+    S_{ij} = \frac{-\textrm{log}_2\left( P(\pi_{ij}) \right)-\textrm{log}_2\left( P(\pi_{ji}) \right)}{2},
+\end{equation}
+así, cuanto menor sea la probabilidad de recorrer el camino mas corto que une a dos nodos, mas información será necesaria para poder acceder a el (saber que aristas atravesar en cada uno de los nodos que componen el camino) y mayor será la información de acceso $S$ entre ese par de nodos. Por la forma en la que esta definida, $S$ es simétrica. Se puede extender para usarse sobre los $K$ caminos mas cortos de una red de la forma
+\begin{equation}
+    S_{ij}^K=\frac{-\textrm{log}\left( \sum_{k=1}^{K}P\left( \pi_{ij}^k \right) \right)-\textrm{log}\left( \sum_{k=1}^{K}P\left( \pi_{ji}^k \right) \right)}{2},
+\end{equation}
+así, $S^K$ captura que tan accesibles son los $K$ caminos mas cortos entre pares de nodos dentro de la red. Cuanto mayor sea $S_{ij}^K$, menos probable será que un \textit{random walker} atraviese alguno de los $K$ caminos mas cortos que unen a los nodos $i$ y $j$.
 
+\subsection{Transitividad}
+La transitividad es una medida que captura las posibilidades de que un mensajero que sigue una caminata aleatoria pueda retomar un camino en caso de que se haya desviado anteriormente. Propuesta por Goñi et al. \cite{GoniFunctionalPrediction}, se define viendo el numero de desviaciones locales de los caminos mas cortos compuestas por dos aristas únicamente. Para esto, primero se calcula el índice de similitud para cada par de nodos de la red. El índice de similitud entre el nodo $i$ y el nodo $j$ viene dado por,
+\begin{equation}
+    m_{ij} = \frac{\sum_{h\in V_i\bigcap V_j}(w_{ih}+w_{hj})}{\sum_{h\neq j}w_{ih}+\sum_{h\neq i}w_{hj}}.
+\end{equation}
+De esta forma, el índice de similitud $m_{ij}$ es la fracción de los nodos que son vecinos comunes del nodo $i$ y el nodo $j$ teniendo en cuenta los pesos de las conexiones. Con el índice de similitud calculado, se define la transitividad de un camino de la forma
+\begin{equation}
+    M(\pi) = \frac{2}{|\Omega|\left( |\Omega| -1\right)}\sum_{h>g\in \Omega}m_{hg}.
+\end{equation}
+Goñi et al \cite{GoniFunctionalPrediction} definen la transitividad para un par de nodos como la transitividad del camino mas corto que los une. Se puede extender la transitividad para que tenga en cuenta los $K$ caminos que unen a un par de nodos de la forma
+\begin{equation}
+    M_{ij}^K=\sum_{k=1}^{K}\hat{P}_K\left( \pi_{ij}^k \right)M\left( \pi_{ij}^k \right)
+\end{equation}
 
-\subsection{Matriz de acoplamiento}
-La matriz de acoplamiento $\matr{G}$ captura
+con $\hat{P}_K\left( \pi_{ij}^k \right)$ definida en \ref{eq:prob_norm}.
+
+\subsection{Autovalores de la matriz de acoplamiento}
+% La matriz de acoplamiento surge al pensar a los nodos de una red como osciladores acoplados entre si por una fuerza de acoplamiento $\sigma$ escalada por las aristas de la red. Como mostraron Arenas et al. \cite{ArenasSync}, la estabilidad de un estado sincronizado entre estos osciladores depende del segundo y ultimo autovalor de la matriz de acoplamiento $G$, $\lambda_2$ y $\lambda_{|N|}$.   
+La matriz de acoplamiento surge cuando se piensa a los nodos de una red como osciladores acoplados a través de sus aristas y de una fuerza de acoplamiento $\sigma$. En esta situación, se puede escribir la ecuación de estado del nodo i como
+\begin{equation}
+    \label{eq:sync}
+    \dot{\mathbf{x}}_i = \mathbf{F}\left( \mathbf{x}_i \right)+\sigma \sum_{j=1}^{|N|}w_{ij}\left[ \mathbf{H}\left( \mathbf{x}_j \right)-\mathbf{H}\left( \mathbf{x}_i \right) \right] = \mathbf{F}\left( \mathbf{x}_i \right)-\sigma \sum_{j=1}^{|N|}G_{ij}\mathbf{H}\left( \mathbf{x}_j \right),
+\end{equation}
+donde $\mathbf{x}_i$ es el vector estado del nodo $i$, $\textbf{F}$ es la función de oscilación, $\mathbf{H}$ es la función de acoplamiento entre osciladores (ambas iguales para todos los nodos) y $G$ es la matriz de acoplamiento, definida
+\begin{equation}
+    G_{ij}  =
+    \begin{cases}
+        -w_{ij}                  & \textrm{ si } i\neq j \\
+        \sum_{j'=1}^{|N|}w_{ij'} & \textrm{ si } i=j.    \\
+    \end{cases}
+\end{equation}
+El caso en el que todos los (idénticos) osciladores de la red están completamente sincronizados en el mismo estado $\mathbf{s}$ es una solución de la ecuación de estados \ref{eq:sync}. Lo que se busca ahora es determinar si este estado de sincronización es estable ante pequeñas perturbaciones. Introduciendo una perturbación $\delta \mathbf{x}_i$ en cada una de las componentes de \ref{eq:sync} para cada $i$ y expandiendo a primer orden $\mathbf{F}$ y $\mathbf{H}$ se puede ver que las ecuaciones forman una estructura de bloques y se pueden diagonalizar en $|N|$ modos desacoplados de la forma
+\begin{equation}
+    \mathbf{\xi_l}= \left[ D\mathbf{F}\left( \mathbf{s} \right)-\sigma\lambda_l D \mathbf{H}\left( \mathbf{s} \right) \right]\xi_l
+\end{equation}
+donde $D\mathbf{F}$ y $D\mathbf{H}$ representan la matriz jacobiana de $\mathbf{F}$ y $\mathbf{H}$ en $\mathbf{s}$ y $\mathbf{\xi_l}$ es el modo asociado al autovalor $\lambda_l$ ($\lambda_1\leq \lambda_2 \leq \cdots \leq \lambda_{|N|}$) de la matriz de acoplamiento $G$. El conjunto de los $\mathbf{\xi}$ se obtiene de las proyecciones de los $\delta \mathbf{x}$ sobre los autovectores de $G$. Como explican Arenas et al. \cite{ArenasSync}, los valores de $\sigma$ para los cuales existe un estado de sincronización estable en la red dependen de las funciones $\mathbf{F}$ y $\mathbf{H}$ y de los autovalores $\lambda_2$ y $\lambda_{|N|}$ de la matriz de acoplamiento. En el caso de una red no dirigida, los autovalores de la matriz de acoplamiento son reales y el valor de la fuerza de acoplamiento para el cual es estable la sincronización, $\sigma_s$, viene dado por
+\begin{equation}\label{eq:sigma_stable}
+    \sigma_s \in \left[ \frac{\alpha_1}{\lambda_2},\frac{\alpha_2}{\lambda_{|N|}} \right] \Rightarrow \frac{\lambda_{|N|}}{\lambda_2}\le\frac{\alpha_2}{\alpha_1},
+\end{equation}
+donde tanto los valores de $\alpha_1$ y $\alpha_2$ dependen de las funciones $\mathbf{F}$ y $\mathbf{H}$. Puede pasar que la red no sea estable para ningún valor de $\sigma_s$ ya que no se cumple la inecuación así como también puede pasar que $\alpha_2=\infty$. La estabilidad de la sincronización de la red depende de los tipos de osciladores y sus formas de interacción, sin embargo, en general, cuanto mas grande sea $\lambda_2$ y mas chico $\lambda_{|N|}$, más posibilidades de tener una sincronización estable tiene una red de osciladores acoplados.
+
+Según Arenas et al \cite{ArenasSync}, se ha encontrado que una excesiva sincronización en redes neuronales esta asociada con desordenes neurológicos como episodios de epilepsia y la enfermedad de Parkinson, lo que indicaría que la sincronización podría tener un rol relevante en el funcionamiento cerebral.
